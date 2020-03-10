@@ -1,0 +1,210 @@
+<include file="common_header" title="会员管理"/>
+        <p class="curr">
+            <a>会员管理</a>&gt;&gt;
+            <span>角色添加</span>
+        </p>
+        <div class="content">
+        <form action="{:U('user_quxian')}" method="post" enctype="multipart/form-data">
+            <div class="list_main">
+
+                <div class="width_table">
+	                <table style="width:100%;">
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>会员管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="1">
+                                  <span>会员列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="2">
+                                  <span>角色类型</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="20">
+                                  <span>管理员列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="3">
+                                  <span>管理列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="4">
+                                  <span>等级设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="5">
+                                  <span>会员关联网</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="6">
+                                  <span>关联银行卡管理</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>财务管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="7">
+                                  <span>充值记录</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="8">
+                                  <span>提现申请</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="9">
+                                  <span>流水记录查询</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>项目管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="10">
+                                  <span>项目列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="11">
+                                  <span>已投项目</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="12">
+                                  <span>项目分类</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>文章管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="13">
+                                  <span>文章类型</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="14">
+                                  <span>文章列表</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>系统设置</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="15">
+                                  <span>网站信息</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="16">
+                                  <span>奖励设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="17">
+                                  <span>幻灯片设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="18">
+                                  <span>支付设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="19">
+                                  <span>密码设置</span>
+
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="text" name="title" placeholder="部门名称">
+                              </label>
+                          </div>
+                      </div></br>
+
+                      <div class="button" style="padding-left: 0px;">
+                            <input type="submit" value="立即提交" class="submit" />
+
+                            <input type="reset" value="重置" class="reset"/>
+                      </div>
+
+	                </table>
+                </div>
+
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        $(function(){
+            $('.auth input[type="checkbox"]').on('change',function(){
+                $(this).parent().parent().next().next().find('input').prop('checked',this.checked);
+            });
+
+            $('.reset').click(function(){
+                $("input:checkbox").removeAttr("checked");
+            })
+        });
+</script>
+
+<script type="text/javascript">
+
+	function addyhk(uid){
+		if(confirm("确认要新增当前用户的银行卡吗？")){
+			var data={
+				uid:uid,
+				account:$("#account" + uid ).val(),
+				bank:$("#bank" + uid ).val()
+			};
+			$.post("{:U('user_yhk_add')}",data,function(e){
+				alert(e.msg); location.reload();
+			},"json");
+		}
+	}
+
+    function bcyhk(objid){
+
+		if(confirm("确认要编辑当前银行卡吗？")){
+			var data={
+				id:objid,
+				id:objid,
+				account:$("#yhk" + objid ).val()
+			};
+
+			$.post("{:U('user_yhk_edit')}",data,function(e){
+				alert(e.msg);
+			},"json");
+        }
+
+	}
+	function scyhk(objid){
+
+		if(confirm("确认要删除当前银行卡吗？")){
+			var data={
+				id:objid,
+				account:$("#yhk" + objid ).val()
+			};
+
+			$.post("{:U('user_yhk_del')}",data,function(e){
+				alert(e.msg);
+				location.reload();
+			},"json");
+        }
+
+	}
+</script>
+<include file="common_footer" menu="menu_user" nav="1"/>

@@ -1,0 +1,79 @@
+<include file="Mobile:header" nav="提现"/>
+<div class="mobile">
+    <div class="othertop">
+        <a class="goback" href="{:U('person')}"><img src="__PUBLIC__/mobile/img/goback.png" /></a>
+        <div class="othertop-font">提现</div>
+    </div>
+    <div class="header-nbsp"></div>
+    <!-- 提现 -->
+    <form action="{:U('cash')}" method="post" id="ifr">
+
+        <div class="blank_card">
+            <label>支付宝用户名：</label><span>{$user['name']}</span>
+            <p></p>
+            <label>支付宝账号：</label><span>{$user['alipay']}</span>
+        </div>
+        <div class="blank_card">
+            <p>提现金额</p>
+            <label class="big">￥</label><input class="big" name="money" id="money" type="text" />
+            <p>可提现金额 <span id="userMoney">{$user.money}</span>元</p>
+            <p>最低提现金额 <span id="userMoney">{$info.cash}</span>元</p>
+        </div>
+        <div class="blank_card">
+            <label>交易密码</label><input type="password" name="pwd" id="pwd" placeholder="请输入交易密码" />
+        </div>
+        <!-- div class="blank_card" >
+             <label>手续费</label> 提现额的{$info['charged']}%
+        </div> -->
+        <!-- <div class="blank_card" style="display: none;">
+             <label>时间</label> 预计30分钟内到账
+        </div> -->
+        <input type="submit" value="确认提现" class="input_btn">
+    </form>
+<!-- 提现  end-->
+</div>
+<style type="text/css" media="screen">
+    .blank_card label {
+    display: inline-block;
+    width: 2.4rem;
+}
+</style>
+<script>
+$(function(){
+    //下拉银行卡
+
+    $("#chose_bank").click(function(){
+        $('.bank_xl').slideDown();
+        $("#chose_bank").prev().find('img').removeClass('down');
+    });
+    $("#ifr").submit(function(){
+        var userMoney = $("#userMoney").text();
+        var bank = $("#bank").val();
+        var money = $("#money").val();
+        var min = "{:getInfo('cash')}";
+        var pwd = $("#pwd").val();
+        var auth = parseInt("{$user.auth}");
+
+        if(money.length <= 0){
+            msg("错误","请输入提现金额！",1);
+            return false;
+        }
+        if(isNaN(money)){
+            $("#money").val("");
+            msg("错误","请输入正确的提现金额！",1);
+            return false;
+        }
+
+        if(parseFloat(money) > parseFloat(userMoney)){
+            msg("错误","请提现金额不能大于用户余额！",1);
+            return false;
+        }
+        if(pwd.length < 6 || pwd.length > 16){
+            msg("错误","请输入正确的交易密码！",1);
+            return false;
+        }
+    })
+})
+</script>
+</body>
+</html>

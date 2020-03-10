@@ -1,0 +1,53 @@
+body {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+label {
+  pointer-events: none;
+}
+label .input {
+  display: none;
+}
+label .input:checked + .toggle-wrapper > .selector {
+  left: calc(100% - 50px);
+  background-color: green;
+}
+label .input:checked ~ .notification > .selected:before {
+  content: "Yes";
+}
+label .toggle-wrapper {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  background-color: #eaeaea;
+  border-radius: 999px;
+  margin: auto;
+  cursor: pointer;
+  pointer-events: all;
+}
+label .toggle-wrapper .selector {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: red;
+  transition: left 0.25s ease;
+  border-radius: 50%;
+}
+label .notification {
+  font-size: 20px;
+  width: 100%;
+}
+label .notification .selected:before {
+  content: "No";
+  font-size: 20px;
+  border-bottom: 2px solid;
+}

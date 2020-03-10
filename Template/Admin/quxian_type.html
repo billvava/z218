@@ -1,0 +1,72 @@
+<include file="common_header" title="会员管理"/>
+        <p class="curr">
+            <a>会员管理</a>&gt;&gt;
+            <span>角色类型</span>
+        </p>
+        <div class="content">
+            <div class="list_main">
+                <div class="title">
+                    <a class="two" onclick="add_quxian()">添加类型</a>
+                    <!-- <a href="javascript:;" onclick="delCheck()" class="four">批量删除</a> -->
+                </div>
+                <table>
+                    <tbody>
+
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>编号</th>
+                        <th>类型名称</th>
+                        <th>操作</th>
+                    </tr>
+                    <volist name="list" id="t">
+                        <tr>
+                            <td><input type="checkbox" name="ck[]" value="{$t.id}"></td>
+                            <td>{$t.id}</td>
+                            <td>{$t.title}</td>
+                            <td>
+                                <a href="javascript:void(0);" class="update" onclick="update({$t.id})">编辑</a>
+                                <a href="javascript:;" onclick="delList({$t.id})" class="del">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <ul class="page">
+                    {$page}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mask_edit" class="mask"></div>
+<script>
+    function update(obj){
+        window.location.href = "{:U('quxian_edit')}?id="+obj;
+    }
+    function delList(obj){
+        if(confirm("确认删除这条记录吗？")){
+//            window.location.href = "/admin/dellist/data/article_type/list/"+obj+".html?re={:U('article_type')}";
+            window.location.href = "{:U('dellist')}?data=auth&list="+obj+"&re={:U('quxian_type')}";
+        }
+    }
+
+    function add_quxian()
+    {
+        window.location.href = "{:U('user_quxian')}";
+    }
+    function delCheck(){
+        var arr = new Array();
+        $("input[name='ck[]']:checked").each(function(i){
+            arr[i] = $(this).val();
+        });
+        var vals = arr.join(",");
+        if(vals != ""){
+            delList(vals);
+        }
+        else{
+            alert("请选择需要删除的内容！");
+        }
+    }
+</script>
+<include file="common_footer" menu="menu_user" nav="1"/>

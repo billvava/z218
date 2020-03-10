@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<include file="common_header" title="订单列表"/>
+<include file="Public_header" />
+<include file="Public_page_css" />
+
+<body class="gray-bg wrapper wrapper-content">
+
+
+<link rel="stylesheet" type="text/css" media="all" href="__PUBLIC__/sldate/daterangepicker-bs3.css" />
+<script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/sldate/moment.js"></script>
+<script type="text/javascript" src="__PUBLIC__/sldate/daterangepicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js"></script>
+
+
+
+	<style>
+		body{
+			width: 100%;
+			max-width: none;
+			background: #eee;
+			height: 100%;
+		}
+	 </style>
+	<!-- <link rel="stylesheet" href="__P_P__/customer/customer.css"> -->
+	<div class="bg"></div>
+	<span class="toast"></span>
+	<table class="customer_box">
+		<tr>
+			<td class="left_box">
+				<div class="user_search">
+					<input type="text" id="user" value="">
+					<a><span style="width:50px;" id="search">+</span></a>
+				</div>
+				<div class="tap">
+					<span class="on">消息</span>
+					<span>联系人</span>
+				</div>
+				<div class="list_box">
+					<ul>
+						<li class="start">正在加载...</li>
+					</ul>
+				</div>
+			</td>
+			<td class="right_box">
+				<div class="top">
+					<!-- <div class="top_items"> -->
+						<!-- <a href="javascript:void(0);" class="back">返回</a> -->
+					<!-- </div> -->
+					<label for="toggle">
+                      <if condition="getInfo('kstatus') eq 1">
+					  <input class="input" type="checkbox" id="toggle" checked="checked" />
+					  <else />
+					  <input class="input" type="checkbox" id="toggle" />
+					  </if>
+					  <div class="toggle-wrapper"><span class="selector"></span></div>
+					</label>
+					<div class="top_items top_items_title">客服中心</div>
+					<div class="top_items top_items_menu"></div>
+				</div>
+				<div class="body_content">
+					<ul>
+						<li class="start">请点击左侧会员列表，选择需要对话的会员</li>
+					</ul>
+				</div>
+				<div class="input_box">
+					<div class="textarea" contenteditable="true"></div>
+				</div>
+				<div class="form_box">
+					<div class="form_img_box">
+						<!-- <img src="__P_I__/bq.png" id="biaoqing">
+						<img src="__P_I__/tp.png" id="tupian">
+						<input type="file" name="imgFile" id="send_img" style="display: none;" accept="image/gif,image/jpeg,image/jpg,image/png"> -->
+					</div>
+					<button id="hsend" class="button">发送</button>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<!--会员列表模板-->
+	<script id="user_list_template" type="text/html">
+	{{each list as value i}}
+	<li data="{{value.id}}" title="{{value.phone}}" class="{{if value.id == this_user}}on{{/if}}">{{value.phone}}{{if value.un_read > 0}}<span class="unread">{{value.un_read}}</span>{{/if}}</li>
+	{{/each}}
+	</script>
+
+	<!--信息列表模板-->
+	<script id="list_template" type="text/html">
+	{{each list as value i}}
+	<li{{if value.is_me == 1}} class="to"{{/if}}>
+		<span class="from_user">{{value.user_number}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.add_time}}</span>
+		<span class="from_msg">{{this_user_id}}{{#value.content}}</span>
+	</li>
+	{{/each}}
+	</script>
+
+	<include file="./Vip/Common/View/Public/biaoqing.html" />
+    <!-- <script src="__P_P__/JSTemplate/template.js"></script>
+	<script src="__P_J__/ajaxfileupload.js"></script>
+    <script src="__P_P__/customer/customer.js"></script> -->
+	<!-- <audio src="__P_P__/customer/dingdong.mp3" id="dingdong"></audio> -->
+	<!-- <script type="text/javascript" src="__P_P__/layer/layer.js"></script> -->
+	<audio src="../../dingdong.mp3" id="dingdong"></audio>
+	<link rel="stylesheet" href="__PUBLIC__/mobile/css/normalize.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/mobile/css/style.css">
+	<link rel="stylesheet" href="__PUBLIC__/mobile/css/customer.css"/>
+    <script type="text/javascript" src="__PUBLIC__/mobile/js/customer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/mobile/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/mobile/js/template.js"></script>
+    <!-- <script type="text/javascript" src="__PUBLIC__/mobile/js/layer.js"></script> -->
+	<script>
+	var get_url = "?";
+	var _p_p_ = '__P_P__';
+	var send_url = "/admin/sendmsg";
+	var act_voice = 0;
+	$(function(){
+	
+	    $('#toggle').click(function(){
+        	if($('#toggle').is(':checked')) {
+                var status = 1;
+           }else{
+           	    var status = 0;
+           }
+
+           $.ajax({
+                  url:"{:U('kstatus')}",
+                  type:"post",
+                  data:{'status':status},
+                  dataType:'json',
+                  success:function(data){
+                     window.location.reload();
+                  },
+              });
+        })
+		
+		layer.confirm('是否开启声音提示？', {
+			btn: ['开启','不开启'] //按钮
+			}, function(){
+				act_voice = 1;
+				//初始化会员列表
+				get_user(1);
+				layer.closeAll();
+			}, function(){
+				//初始化会员列表
+				get_user(1);
+				layer.closeAll();
+			}
+		);
+		setSize();
+		/*$(window).resize(function(){
+			setSize();
+		})*/
+		function setSize(){
+			var w = $(window).width();
+			var h = $(window).height();
+			var top = $('.top').outerHeight();
+			var input_box = $('.input_box').outerHeight();
+			var form_box = $('.form_box').outerHeight();
+			var search = $('.user_search').outerHeight();
+			var tap = $('.tap').outerHeight();
+			$('.body_content').css('height', (h - top - input_box - form_box) + 'px');
+			$('.list_box').css('height', (h - search - tap) + 'px');
+			$('.left_box, .right_box').css('height', h + 'px');
+
+			if(w < 600){
+				$('.left_box').show();
+				$('.right_box').hide();
+				$('.back').show();//返回按钮
+			}else{
+				$('.left_box').show();
+				$('.back').hide();//返回按钮
+				$('.right_box').show();
+			}
+		}
+	})
+
+    //初始化rem
+    function initRem() {
+        var width = window.innerWidth;
+        if (width > 400) {
+            width = 400;
+            //document.querySelector('.pcshow').innerText = '请按F12，选择手机模式'
+        }
+        var rem = width / 7.5 + 'px';
+        document.documentElement.style.fontSize = rem;
+    }
+
+	initRem();
+	//监听页面变化
+	window.onresize = function () {
+		initRem();
+	}
+</script>
+
+<!-- </html> -->
+<include file="common_footer" menu="menu_lottery" nav="0"/>

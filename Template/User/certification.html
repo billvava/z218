@@ -1,0 +1,70 @@
+<include file="Mobile:header" nav="帕点转让"/>
+<style>
+    .abc{  width: 75%;  height: .5rem;  padding: .15rem 0;  font-size: .3rem; text-align: right;  background: none;  color: #fff;
+    }
+    .blank_card input[type=text], .blank_card input[type=password], select{border: 1px #fff solid;background: none;min-height: .7rem;color: #fff;}
+    .leib{
+        width: 100%;
+        height: 40px;}
+    .leib li{
+        width: 33.3%;
+        height: 40px;float: left;display:inline-block;text-align: center;line-height: 40px;color: #fff;}
+</style>
+<div class="mobile">
+    <div class="othertop">
+        <a class="goback" href="{:U('person')}"><img src="__PUBLIC__/mobile/img/goback.png" /></a>
+        <div class="othertop-font">帕点转让</div>
+    </div>
+    <div class="header-nbsp"></div>
+        <div class="login_bg">
+
+
+
+
+                <form action="{:U('certification')}" method="post">
+                    <div class="input_text cert">
+                        <label>剩余点数</label>
+                        <input type="text" readonly="readonly" value="{$user.padian}" >
+                    </div>
+                    <div class="blank_card">
+                        <label>转让会员</label>
+                        <select name="send" id="bank">
+                        <volist name='top_list' id='vo'>
+                            <option value="{$vo.phone}" style="color: #000;">{$vo.phone}</option>
+
+                        </volist>
+                    </select>
+                    </div>
+                    <div class="input_text cert">
+                        <label>转让点数</label>
+                        <input type="text" name="padian"  placeholder="请输入要转让的帕点点数">
+                    </div>
+
+                    <input type="submit" class="input_btn" value="确认转让" />
+                </form>
+
+            <div class="input_text cert">
+
+            </div>
+            <div class="leib" style="border-bottom: 1px #fff solid">
+                <ul>
+                    <li>转让会员</li>
+                    <li>转让点数</li>
+                    <li>转让时间</li>
+                </ul>
+            </div>
+            <div class="leib">
+                <volist name='padian_list' id='v'>
+                <ul>
+                    <li>{$v.uid}</li>
+                    <li>{$v.padian}</li>
+                    <li>{:date('Y-m-d H:i:s',$v['time'])}</li>
+                </ul>
+                </volist>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

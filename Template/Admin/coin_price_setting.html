@@ -1,0 +1,102 @@
+<include file="common_header" title="丰益币价格"/>
+<style>
+    .page  a:hover {
+        border: 1px solid
+        #189f92;
+        color:
+                #189f92;
+    }
+    .page  a {
+        border: 1px solid
+        #e4e4e4;
+        color:
+                #999;
+        cursor: pointer;
+        display: inline-block;
+        height: 29px;
+        line-height: 29px;
+        padding: 0 10px;
+        margin: 0 5px;
+        text-align: center;
+        border-radius: 2px;
+    }
+</style>
+<p class="curr">
+    <a>系统设置</a>&gt;&gt;
+    <span>丰益币价格</span>
+</p>
+<div class="content">
+    <div class="list_main">
+        <div class="title">
+            <form action="{:U('coin_price_setting')}" method="post" id="ifr">
+                <input type="hidden" name="type" value="1"/>
+                <p>
+                    <label>价格</label><input type="text" name="price" class="txt" placeholder="丰益币价格">
+                    <label>日期</label><input type="text" name="pub_time" class="timer">
+                    <input type="submit" class="sub1" value="添加">
+                </p>
+
+
+            </form>
+        </div>
+        <table>
+            <tbody>
+            <tr>
+                <!--<th><input type="checkbox" id="selectAll"></th>-->
+                <th>日期</th>
+                <th>价格</th>
+            </tr>
+            <volist name="list" id="r">
+                <tr>
+                    <!--<td><input type="checkbox" name="ck[]" value="{$r.id}"></td>-->
+                    <td>{$r.pub_time|date='Y-m-d',###}</td>
+                    <td>{$r.price}</td>
+
+
+
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <ul class="page">
+            {$page}
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+
+<script>
+    $().ready(function(){
+        $('.timer').datetimepicker({
+            lang:'ch',
+            timepicker:false,
+            format:'Y-m-d'
+        });
+    });
+    function isPay(id,money){
+        $("#pid").val(id);
+        $("#pmoney").html(money);
+        $("#isPayOk").show();
+    }
+    function delList(obj){
+        if(confirm("确认删除这条记录吗？")){
+//            window.location.href = "/admin/dellist/data/slide/list/"+obj+".html?re={:U('system_banner')}";
+            window.location.href = "{:U('dellist')}?data=recharge&list="+obj+"&re={:U('finance_payment')}";
+        }
+    }
+    function delCheck(){
+        var arr = new Array();
+        $("input[name='ck[]']:checked").each(function(i){
+            arr[i] = $(this).val();
+        });
+        var vals = arr.join(",");
+        if(vals != ""){
+            delList(vals);
+        }
+        else{
+            alert("请选择需要删除的内容！");
+        }
+    }
+</script>
+<include file="common_footer" menu="menu_finance" nav="0"/>

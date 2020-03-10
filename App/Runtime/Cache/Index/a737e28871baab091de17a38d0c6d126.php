@@ -1,0 +1,345 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="/Public/mobile/css/base.css?k=<?php echo rand(1,99999);?>"/>
+    <script type="text/javascript" src="/Public/mobile/js/adaptive.js"></script>
+    <script type="text/javascript" src="/Public/mobile/js/config.js"></script>
+    <script type="text/javascript" src="/Public/mobile/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/Public/mobile/js/public.js"></script>
+    <script type="text/javascript">
+        function msg(title,content,type,url){
+            $("#msgTitle").html(title);
+            $("#msgContent").html(content);
+            if(type==1){
+                var btn = '<input type="button" value="确定" onclick="$(\'#msgBox\').hide();" style="background-color: #4f79bc;color:#fff;border: none;padding:5px 10px;"/>';
+            }
+            else{
+                var btn = '<input type="button" value="确定" onclick="window.location.href=\''+url+'\'" style="background-color: #4f79bc;color:#fff;border: none;padding:5px 10px;"/>';
+            }
+            $("#msgBtn").html(btn);
+            $("#msgBox").show();
+        }
+    </script>
+</head>
+<body>
+<div id="msgBox" style="width: 100%;background-color: rgba(0,0,0,0.25);height: 1000px;position: fixed;top: 0;left: 0;z-index: 9999;font-size:.28rem;display: none;">
+    <div style="width: 80%;margin-top: 40%;margin-left: 10%;background-color: #fff;border-radius: 5px;overflow: hidden;">
+        <div id="msgTitle" style="padding:10px 20px;background-color: #4f79bc;color:#fff;">
+            提示
+        </div>
+        <div id="msgContent" style="padding:20px;line-height: 25px;">
+            内容
+        </div>
+        <div id="msgBtn" style="padding: 10px 20px;text-align: right;border-top: 1px solid #eee;">
+            <input type="button" value="确定" style="background-color: #4f79bc;color:#fff;border: none;padding:5px 10px;"/>
+            <input type="button" value="取消" style="background-color: #4f79bc;color:#fff;border: none;padding:5px 10px;"/>
+        </div>
+    </div>
+</div>
+<style>
+    body, html{height:100%;}
+    body{background:url('/Public/mobile/img/czbg.jpg')no-repeat;background-size:100% 100%;}
+    .container_page{background:none;}
+    .othertop{background:none;}
+    .input_text{    background:none;border-bottom: 0px solid #e0e0e0;padding-left: 0rem;}
+    .input_text input{background:#182434;color:#fff;padding-left: 10px;padding:0;height: .8rem;border-radius: 5px;}
+    #imgcode{padding:0 .15rem;background-image: linear-gradient(to right, #fdc727 , #ea9a41);border-radius: 4px;top: .07rem;}
+    .input_btn{background-image: linear-gradient(to right, #fdc727 , #ea9a41);}
+    .t1{color: #fff;text-align: center;padding-top: 1.5rem;font-size: 22px;}
+    .p2{color:#fff;}
+
+    input::-webkit-input-placeholder{
+        color:#666;
+    }
+</style>
+<div class="mobile">
+    <div class="othertop">
+        <a class="goback" href="<?php echo U('login');?>"><img src="/Public/mobile/img/goback.png" /></a>
+        <!-- <div class="othertop-font">注册</div> -->
+    </div>
+    <div class="t1">
+        注册Fengyi平台
+    </div>
+
+    <div class="container_page">
+        <div style="text-align: center;">
+            <!-- <img src="/Public/uploads/mlogo2.png" width="50%"> -->
+        </div>
+        <div class="reg_bg">
+	        <form action="<?php echo U('reg');?>" method="post" id="ifr">
+	            <div class="input_text">
+                    <!-- <i><img src="/Public/mobile/img/icon_tel.png"></i> -->
+                    <input type="text" id="phone" name="phone" placeholder="请输入手机号" maxlength="11">
+                </div>
+                <div class="input_text">
+                    <!-- <i><img src="/Public/mobile/img/icon_pwd.png"></i> -->
+                    <input type="password" placeholder="请设置登录密码" id="pwd" name="pwd">
+                    <i class="pwd_show"><img src="/Public/mobile/img/see.png" id="pwd_show"></i>
+                </div>
+                <div class="input_text">
+                    <!-- <i><img src="/Public/mobile/img/icon_pwd.png"></i> -->
+                    <input type="password" placeholder="请再输入登录密码" id="pwd2" name="pwd2">
+                    <i class="pwd_show"><img src="/Public/mobile/img/see.png" id="pwd_show2"></i>
+                </div>
+                <div class="input_text">
+                    <!-- <i><img src="/Public/mobile/img/icon_code.png"></i> -->
+                    <input type="text" id="code" name="code" placeholder="请输入图形验证码">
+                    <button id="imgcode" type="button" style="font-style: italic;">1234</button>
+                </div>
+                <!-- <?php if(smsStatus('18001') == 1): ?>-->
+
+                <!--<?php endif; ?> -->
+
+                <div class="input_text">
+                    <!-- <i><img src="/Public/mobile/img/icon_person.png"></i> -->
+                    <input type="text" name="top"  value = "<?php echo ($phone); ?>" placeholder="推荐人id（必填）">
+                </div>
+                <div class="error_tips"></div>
+                <input type="submit" class="input_btn" value="立即注册" />
+                <!--<p class="p1">点击完成注册，即表示您同意<a href="">《服务协议》</a></p>-->
+                <p class="p2">已有帐号？<a href="login.html">请登录</a></p>
+	        </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var imgCode = "";
+    var chars = ['0','1','2','3','4','5','6','7','8','9'];
+    $(function(){
+        generateMixed();
+    });
+    //创建验证码
+    function generateMixed(n) {
+	
+        var url = "/handle/smsRand.html";
+		console.log(url);
+        $.ajax({
+		
+            type : "POST",
+            url : url,
+            data: {key:n},
+            dataType : "json",
+            success : function(result){
+			
+                imgCode = result;
+                $("#imgcode").html(result);
+            },
+            error:function(){
+                $("#imgcode").html('8888');
+            }
+        });
+    }
+    //变换验证码
+    $("#imgcode").click(function(){
+        generateMixed();
+    });
+    checkPwd("pwd","pwd_show");
+    checkPwd("pwd2","pwd_show2");
+    $("#ifr").submit(function(){
+        var phone = $("#phone").val();
+        var pwd = $("#pwd").val();
+        var pwd2 = $("#pwd2").val();
+        var code = $("#code").val();
+
+        // var smsCode = $("#smsCode").val();
+        if(phone.length != 11){
+            msg("错误","请输入11位手机号码！",1);
+            return false;
+        }
+        var myreg=/^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+        if (!myreg.test(phone)) {
+            msg("错误","手机格式不正确！",1);
+            return false;
+        }
+        if(pwd.length < 6 || pwd.length > 16){
+            msg("错误","请输入6-16个字符的密码！",1);
+            return false;
+        }
+        if(pwd2.length < 6 || pwd2.length > 16){
+            msg("错误","请再次输入6-16个字符的密码！",1);
+            return false;
+        }
+        if(pwd != pwd2){
+            msg("错误","两次密码不一致！",1);
+            return false;
+        }
+
+        if(code.length != 4){
+            msg("错误","请输入4位图形验证码！",1);
+            return false;
+        }
+        if(code != imgCode){
+            msg("错误","图形验证码不正确！",1);
+            generateMixed();
+            return false;
+        }
+        // if(smsCode.length != 4){
+        //     msg("错误","请输入4位短信验证码！",1);
+        //     return false;
+        // }
+    });
+    function regcode(time) {
+        var phone = $("#phone").val();
+        var pwd = $("#pwd").val();
+        var pwd2 = $("#pwd2").val();
+        var code = $("#code").val();
+        var smsCode = $("#smsCode").val();
+        if(phone.length != 11){
+            msg("错误","请输入11位手机号码！",1);
+            return false;
+        }
+        var myreg=/^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+        if (!myreg.test(phone)) {
+            msg("错误","手机格式不正确！",1);
+            return false;
+        }
+        if(pwd.length < 6 || pwd.length > 16){
+            msg("错误","请输入6-16个字符的密码！",1);
+            return false;
+        }
+        if(pwd2.length < 6 || pwd2.length > 16){
+            msg("错误","请再次输入6-16个字符的密码！",1);
+            return false;
+        }
+        if(pwd != pwd2){
+            msg("错误","两次密码不一致！",1);
+            return false;
+        }
+
+        if(code.length != 4){
+            msg("错误","请输入4位图形验证码！",1);
+            return false;
+        }
+        if(imgCode == ""){
+            msg("错误","请重新输入图形验证码！",1);
+            generateMixed();
+            return false;
+        }
+        if(code != imgCode){
+            msg("错误","图形验证码不正确！",1);
+            generateMixed();
+            return false;
+        }
+        var btn = $("#getcode");
+        var url = "/handle/zhuce.html";
+        $.ajax({
+            type : "POST",
+            url : url,
+            data: {phone:phone,code:imgCode,smsCode:smsCode},
+            dataType : "json",
+            success : function(result){
+			console.log(result);
+                if(result[0]==1){
+                    msg("提示","发送成功！",1);
+                    btn.addClass("on");
+                    btn.attr("disabled", true);  //按钮禁止点击
+                    btn.text(time <= 0 ? "发送" : ("" + (time--) + "s"));
+                    var hander = setInterval(function() {
+                        if (time <= 0) {
+                            generateMixed();
+                            clearInterval(hander); //清除倒计时
+                            btn.text("发送");
+                            btn.removeClass("on");
+                            btn.attr("disabled", false);
+                            return false;
+                        }else {
+                            btn.text("" + (time--) + "s");
+                        }
+                    }, 1000);
+                }else{
+                    generateMixed();
+                    if(result[0] == -1){
+                        msg("错误",result[1],2,window.location.href);
+                    }
+                    else if(result[0] == -2){
+                        generateMixed();
+                        msg("错误",result[1],1);
+                    }
+                    else{
+                        msg("错误",result[1],1);
+                    }
+                    //alert(result[1]);//result[0]不等于等于1代表错误，result[1]代表错误理由
+                }
+            },
+            error:function(){
+                msg("错误","系统繁忙，发送失败！",1);
+            }
+        });
+    }</script>
+
+
+    <script>
+
+        $('.mycode').click(function(){
+            // alert(a);
+            var phone = $("#phone").val();
+
+            if(phone=='' || phone==null){
+                layer.msg('请输入手机号码');
+            }
+
+            // if(a==1){
+            //     layer.msg('图形验证码错误');
+            // }else{
+                $.post("<?php echo U('handle/sendCode');?>",{'mobile':phone},function(data){
+
+                if(data.status==1){
+                    msg("提示",data.message,1);
+                    // layer.msg(data.message);
+                    RemainTime();
+                }else{
+                    msg("提示",data.message,1);
+                    // layer.msg(data.message);
+                }
+            });
+            // }
+
+        });
+
+        var intime="<?php echo (session('set_time')); ?>";
+        var timenow ="<?php echo time(); ?>";
+
+        var bet=(parseInt(intime)+60)-parseInt(timenow);
+        $(document).ready(function(){
+            if(bet>0){
+                RemainTime();
+            }
+        });
+        var iTime = 59;
+        var Account;
+        if(bet>0){
+            iTime=bet;
+        }
+        function RemainTime(){
+            var iSecond,sSecond="",sTime="";
+            if (iTime >= 0){
+                iSecond = parseInt(iTime%60);
+                iMinute = parseInt(iTime/60)
+                if (iSecond >= 0){
+                    if(iMinute>0){
+                        sSecond = iMinute + "分" + iSecond + "秒";
+                    }else{
+                        sSecond = iSecond + "秒";
+                    }
+                }
+                sTime=sSecond;
+                if(iTime==0){
+                    clearTimeout(Account);
+                    sTime='获取验证码';
+                    iTime = 59;
+                }else{
+                    Account = setTimeout("RemainTime()",1000);
+                    iTime=iTime-1;
+                }
+            }else{
+                sTime='没有倒计时';
+            }
+            $("#getcode").html(sTime);
+        }
+    </script>
+
+</body>
+</html>

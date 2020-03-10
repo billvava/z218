@@ -1,0 +1,322 @@
+<include file="Mobile:header" nav="客服中心"/>
+
+<body>
+   <style>
+   	body{
+   		width: 100%;
+   		max-width: none;
+   		background: #eee;
+   		height: 100%;
+   	}
+
+	/*禁用滚动条*/
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+   	.bg{
+   		display: none;
+   		height: 100%;
+   		line-height: 100%;
+   		width: 100%;
+   		background: rgba(0,0,0,0.4);
+   		position: fixed;
+   		z-index: 9999;
+   		top: 0;
+   		left: 0;
+   	}
+   	.body_content{
+   		margin-top: 1rem;
+   		margin-bottom: 3rem;
+   		padding: 10px;
+   	}
+   	.body_content li{
+   		width: 100%;
+   		margin-bottom: 10px;
+   	}
+   	.body_content li .from_user{
+   		display: block;
+   		padding: 4px 0;
+   		white-space: nowrap;
+   	}
+   	.body_content li .from_msg{
+   		padding: 8px;
+   		background: #fff;
+   		border-radius: 5px;
+   		position: relative;
+   		display: block;
+   	}
+   	.body_content li.to .from_user{
+   		color: #b5262d;
+   	}
+	.body_content li img.content_img{
+		max-width: 100%;
+	}
+	/*---------------------------顶部导航------------------------------*/
+	.top{
+		height: 1rem;
+		width: 100%;
+		position:fixed;
+		top: 0;
+		background: #fff;
+		/*border-bottom:1px solid #e3e3e3;*/
+		z-index: 999;
+		display: flex;
+		justify-content: space-between;
+		box-shadow: 0 2px 5px 1px rgba(0,0,0,0.1);
+	}
+	.top > .top_items{
+		padding: 0 20px;
+		font-size: 0.4rem;
+		display: flex;
+		align-items: center;
+	}
+	.top > .top_items > a{
+		font-size: 0.3rem;
+		color: #666;
+	}
+	.top > .top_items_title{
+		text-align: center;
+		font-size: 0.3rem;
+	}
+	.top > .top_items_menu > a{
+		font-size: 0.25rem;
+	}
+	/*----------------------------顶部导航end----------------------------*/
+	.input_box{
+		position: fixed;
+		bottom: 1rem;
+		box-shadow: 0 -2px 5px 1px rgba(0,0,0,0.1);
+		width: 100%;
+		background: #fff;
+		padding: 5px 5px 0 5px;
+	}
+	.input_box .textarea{
+		width: 100%;
+		height: 1.8rem;
+		border: none;
+		background: #efefef;
+		border-radius: 5px;
+		padding: 10px;
+		display: ;
+	}
+	.form_box{
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 1rem;
+		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 10px;
+	}
+	.form_box img{
+		height: 0.6rem;
+		width: auto;
+		margin-right: 10px;
+	}
+	.form_box button{
+		height: 0.8rem;
+		padding: 0 20px;
+		color: #fff;
+		background: #b5262d;
+		border: none;
+		border-radius: 0.3rem;
+	}
+	.biaoqing_box{
+		background: #f6f6f6;
+		z-index: 99999;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 300px;
+		overflow: scroll;
+		display: none;
+		padding: 4px;
+	}
+
+	/* emoticons */
+	.ke-plugin-emoticons {
+		position: relative;
+		width: 100%;
+		margin-top: 8px;
+	}
+	.ke-plugin-emoticons .ke-table {
+		border:0;
+		margin:0 auto;
+		padding:0;
+		border-collapse:separate;
+		width: 100%;
+	}
+	.ke-plugin-emoticons .ke-cell {
+		margin:0;
+		background: #f6f6f6;
+		cursor:pointer;
+		text-align: center;
+		padding: 8px 0;
+	}
+	.ke-plugin-emoticons .ke-img {
+		display:block;
+		background-repeat:no-repeat;
+		overflow:hidden;
+		width:24px;
+		height:24px;
+		margin: 0 auto;
+		padding: 0;
+		border: 0;
+	}
+    </style>
+    <div class="bg"></div>
+	<div class="top">
+		<div class="top_items">
+			<a href="javascript:void(0);" class="" onclick="history.back('')">返回</a>
+		</div>
+		<div class="top_items top_items_title">客服中心<if condition="getInfo('kstatus') eq 1"><span style="color:green">(在线)</span><else /><span style="color:#999">(离线)</span></if></div>
+		<div class="top_items top_items_menu"></div>
+	</div>
+    <div class="body_content">
+    	<ul>
+    		<script id="list_template" type="text/html">
+    		{{each list as value i}}
+    		<li{{if value.is_me == 1}} class="to"{{/if}}>
+    			<span class="from_user">{{value.user_number}}&nbsp;&nbsp;&nbsp;&nbsp;{{value.add_time}}</span>
+    			<span class="from_msg">{{this_user_id}}{{#value.content}}</span>
+    		</li>
+    		{{/each}}
+    		</script>
+    	</ul>
+    </div>
+    <div class="input_box">
+    	<div class="textarea" contenteditable="true"></div>
+    </div>
+    <div class="form_box">
+    	<div class="form_img_box">
+    	<!-- <img src="__P_I__/bq.png" id="biaoqing">
+    	<img src="__P_I__/tp.png" id="tupian">
+		<input type="file" name="imgFile" id="send_img" style="display: none;" accept="image/gif,image/jpeg,image/jpg,image/png"> -->
+        </div>
+    	<button id="qsend">发送</button>
+    </div>
+	<include file="./Template/User/biaoqing.html" />
+    <!-- <script src="__P_P__/JSTemplate/template.js"></script>
+	<script src="__P_J__/ajaxfileupload.js"></script> -->
+    <link rel="stylesheet" href="__PUBLIC__/mobile/css/customer.css"/>
+    <script type="text/javascript" src="__PUBLIC__/mobile/js/customer.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/mobile/js/ajaxfileupload.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/mobile/js/template.js"></script>
+    <script>
+    	var lock_send = 0;//是否禁用发送
+
+    	$(function(){
+			//模拟点击上传图片
+			$('#tupian').on('click', function(){
+				if(lock_send > 0){
+    				return false;
+    			}
+				$('#send_img').val('');
+				$('#send_img').click();
+			})
+
+    		//点击页面关闭表情框
+    		$(document).on('click', function(){
+     			$('.bg').hide();
+    			$('.biaoqing_box').hide();
+    		})
+
+    		//打开表情框
+    		$('#biaoqing').on('click', function(){
+    			$('.bg').show();
+    			$('.biaoqing_box').show();
+    			return false;
+    		})
+
+    		$('.ke-plugin-emoticons .ke-img').on('click',function(){
+    			var this_index = $('.ke-img').index($(this));
+    			$('.textarea').append("<img src='__P_P__/Kindeditor/plugins/emoticons/images/" + this_index + ".gif'>");
+     			$('.bg').hide();
+    			$('.biaoqing_box').hide();
+    			return false;
+    		})
+
+			$('#send_img').on('change', function(){
+			  lock_send = 1;//启用锁定发送，防止重复发送
+			  $('#send').text('发送中...');
+			  $.ajaxFileUpload({
+					url: "/user/sendmsg",
+					secureuri: false,
+					fileElementId: $(this).attr('id'),
+					dataType: "application/json",
+					type: "POST",
+					success: function (resp) {
+						resp = JSON.parse(resp);
+
+						if(!resp.error) {
+							get_content();//重新刷新列表
+						} else {
+							mui.toast(resp.error, {duration: 1500, type: 'div'});
+						}
+						lock_send = 0;//解除发送锁定
+						 $('#send').text('发送');
+					},
+					error: function (data, status, e) {
+						lock_send = 0;//解除发送锁定// console.log(e);
+						 $('#send').text('发送');
+					}
+				});
+			})
+
+    		$('#send').on('click', function(){
+    			if(lock_send > 0){
+    				return false;
+    			}
+    			var content = $('.textarea').html();
+    			if(content.length > 0){
+    				lock_send = 1;//启用锁定发送，防止重复发送
+    				 $('#send').text('发送中...');
+					$.ajax({
+						type: "POST",
+						url: "/user/sendImg?v=" + Math.random(),
+						data: {"content": content},
+						dataType: "json",
+						success: function (data) {
+							if(data.status){
+								get_content();
+								$('.textarea').html('');
+							}else{
+								mui.toast(data.info);
+							}
+							lock_send = 0;//解除发送锁定
+							 $('#send').text('发送');
+						},
+						error: function(){
+							lock_send = 0;//解除发送锁定
+							 $('#send').text('发送');
+						}
+					})
+				}
+    		})
+
+    		//公司进入先不加载
+    		get_content();
+    		function get_content(){
+	 			$.ajax({
+					type: "GET",
+					url: "/user/getmsg",
+					dataType: "json",
+					success: function (data) {
+						if(data.list.length > 0){
+							var inner_content = template('list_template',data);
+							$('.body_content ul').append(inner_content);
+							$(document).scrollTop($('.body_content ul').height());
+						}
+					}
+				})
+	 			setTimeout(function(){get_content()},2000);
+    		}
+    	})
+    </script>
+	<include file="Public/foot" />
+</body>
+</html>

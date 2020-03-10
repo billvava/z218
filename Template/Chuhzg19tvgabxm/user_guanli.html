@@ -1,0 +1,95 @@
+<include file="common_header" title="会员管理"/>
+        <p class="curr">
+            <a>会员管理</a>&gt;&gt;
+            <span>管理员列表</span>
+        </p>
+        <div class="content">
+            <div class="list_main">
+                <div class="title">
+                    <a class="two" onclick="add_guanli()">添加管理员</a>
+                    <!-- <a href="javascript:;" onclick="delCheck()" class="four">批量删除</a> -->
+                </div>
+                <table>
+                    <tbody>
+
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th style="width: 33.33%;">编号</th>
+                        <th style="width: 33.33%;">类型名称</th>
+                        <th style="width: 33.33%;">操作</th>
+                    </tr>
+                    <volist name="list" id="t">
+                        <tr>
+                            <td><input type="checkbox" name="ck[]" value="{$t.id}"></td>
+                            <td>{$t.id}</td>
+                            <td>{$t.name}</td>
+                            <td>
+                                <a href="javascript:void(0);" class="update" onclick="update({$t.id})">编辑</a>
+                                <!-- <if condition="$t['status'] eq 1">
+                                            <a href="javascript:void(0);" class="update" onclick="stop({$t.id},3)">禁用</a>
+                                            <else/>
+                                            <a href="javascript:void(0);" class="update" onclick="stop({$t.id},2)">启用</a>
+                                </if> -->
+
+                                <a href="javascript:;" onclick="delList({$t.id})" class="del">删除</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+                <ul class="page">
+                    {$page}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mask_edit" class="mask"></div>
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js?v=2.1.4"></script>
+<script>
+    function update(obj){
+        window.location.href = "{:U('auth_edit')}?id="+obj;
+    }
+    function delList(obj){
+        if(confirm("确认删除这条记录吗？")){
+//            window.location.href = "/admin/dellist/data/article_type/list/"+obj+".html?re={:U('article_type')}";
+            window.location.href = "{:U('dellist')}?data=admin&list="+obj+"&re={:U('user_guanli')}";
+        }
+    }
+
+    function add_guanli()
+    {
+        window.location.href = "{:U('auth_edit')}";
+    }
+
+
+    function stop(obj,type){
+        var msg = "";
+        if(type == 3){
+            msg = "确认禁用该账号吗？";
+        }
+        if(type == 2){
+            msg = "确认启用该账号吗？";
+        }
+
+        if(confirm(msg)){
+//            window.location.href = "/admin/user_update_status/id/"+obj+"/type/"+type+".html?re={:U('')}";
+            window.location.href = "{:U('auth_stop')}?id="+obj+"&type="+type+"&re={:U('')}";
+        }
+    }
+    function delCheck(){
+        var arr = new Array();
+        $("input[name='ck[]']:checked").each(function(i){
+            arr[i] = $(this).val();
+        });
+        var vals = arr.join(",");
+        if(vals != ""){
+            delList(vals);
+        }
+        else{
+            alert("请选择需要删除的内容！");
+        }
+    }
+</script>
+<include file="common_footer" menu="menu_user" nav="2"/>

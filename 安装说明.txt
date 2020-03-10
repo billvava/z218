@@ -1,0 +1,10 @@
+数据库文件：数据库
+
+
+修改数据库信息文件：Public/config.php
+
+
+自动分红页面地址（需24小时一直打开）：你的域名/index.php?s=/Handle/jiesuan
+
+
+你的域名/chuhzg19tvgabxm/login.html   用户名：admin   密码：123456

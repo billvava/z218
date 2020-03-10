@@ -1,0 +1,56 @@
+<include file="Mobile:header" nav="文章详情"/>
+<body>
+<div class="mobile">
+    <div class="othertop">
+        <a class="goback" href="javascript:history.back();"><img src="__PUBLIC__/mobile/img/goback.png" /></a>
+        <div class="othertop-font">详情</div>
+    </div>
+    <div class="news_detail">
+        <h1 class="tit">{$article.title}</h1>
+        <!--<p class="time">{:date("Y-m-d",strtotime($article['time']))}</p>-->
+        <div>{:htmlspecialchars_decode($article['content'])}</div>
+		<div style="height: 80px" ></div>
+    </div>
+	<div style="height: 30px" ></div>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/xin_mobile/staticfaxian/css/foot.css" />
+<style>
+body, html {
+    font-family: Helvetica, Arial;
+    font-size: .24rem;
+    color:
+    #fff;
+}
+    .news_detail{background:none;margin-bottom:30px;}
+
+    .footer{background:url('/Public/mobile/img/zxbg.jpg') no-repeat;background-size:100% 100%;}
+
+.footer>a{    width: 25%;}
+
+    .footer>a:nth-child(1),.footer>a:nth-child(2),.footer>a:nth-child(3),.footer>a:nth-child(4){
+        margin-top: 0.1rem;
+    }
+    .footer {
+    z-index: 5555;
+    
+
+    overflow: hidden;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+</style>
+
+<footer class=footer>
+<a href="{:U('mobile/index')}"><img src="__PUBLIC__/xin_mobile/static/picture/rbtn_home_hot_normal.png"></a>
+<a href="{:U('mobile/TradingHall')}"><img src="__PUBLIC__/xin_mobile/static/picture/rbtn_home_product_checked.png"></a>
+<!-- <a id="kefu"><img src="__PUBLIC__/xin_mobile/static/picture/icon_sanbiao_home.png"></a> -->
+<!-- <a href="tencent://message/?uin={:getInfo('qq')}&Site=&Menu=yes"><img src="__PUBLIC__/xin_mobile/static/picture/icon_sanbiao_home.png"></a> -->
+<!-- <a href="http://wpa.qq.com/msgrd?v=3&uin={:getInfo('qq')}&site=qq&menu=yes"><img src="__PUBLIC__/xin_mobile/static/picture/icon_sanbiao_home.png"></a> -->
+<!-- <a href="{:U('user/customer')}"><img src="__PUBLIC__/xin_mobile/static/picture/icon_sanbiao_home.png"></a> -->
+<a href="{:U('about/index')}"><img src="__PUBLIC__/xin_mobile/static/picture/rbtn_home_find_normal.png"></a>
+<a href="{:U('user/person')}"><img src="__PUBLIC__/xin_mobile/static/picture/rbtn_home_my_normal.png"></a></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<include file="Mobile:header" nav="个人中心"/>
+<style>
+    body{background:url('__PUBLIC__/mobile/img/zxbg.jpg')no-repeat;background-size:100% 100%;}
+    .user_list{background:none;}
+    .my_total{background:none;}
+    .user_list li a{border-bottom: 0px solid #eaeaea;color: #f7f1f1;}
+</style>
+<div class="mobile">
+    <div class="my_total">
+        <div class="user">
+            <!-- <span>我的账户：{$user.phone}</span> -->
+            <span>用户等级：{:getUserMember($user['level'])}</span>
+        </div>
+        <p class="bal">{$user.money}</p>
+        <p class="bal_tit">账户余额（元）</p><br>
+        <p class="bal_tit">我的账户：{$user.phone}</p>
+<!-- <if condition="$user.dongjiemoney neq ''">
+
+				<p class="bal">{$user.dongjiemoney}</p>
+        <p class="bal_tit">冻结余额（元）</p>
+					<else />
+
+					</if> -->
+
+        <div class="wait">
+            <div class="item">
+                <span class="span_num">{$user.value}</span>
+                <span class="span_tit">累计投资</span>
+            </div>
+			<div class="item">
+                <span class="span_num">{$yj_money}</span>
+                <span class="span_tit">团队总业绩</span>
+            </div>
+			<div class="item">
+                <span class="span_num">{$u_count}</span>
+                <span class="span_tit">团队总人数</span>
+            </div>
+            <div class="item">
+                <span class="span_num">{$tnum}</span>
+                <span class="span_tit">直推人数</span>
+            </div>
+            <!-- <div class="item">
+                <span class="span_num">{:getUserUnIncome($uid)}</span>
+                <span class="span_tit">待收利息（元）</span>
+            </div> -->
+            <!-- <div class="item">
+                <span class="span_num">{:getUserUnPrincipal($uid)}</span>
+                <span class="span_tit">待收本金（元）</span>
+            </div> -->
+        </div>
+    </div>
+    <div class="user_btn" >
+        <a href="{:U('Mobile/details_futou')}"  style = "    color: #ffffff;background: #ffac16;">复投</a>
+        <a href="{:U('cash')}"  style = "    color: #ffffff;background: #ffac16;">提现</a>
+    </div>
+    <ul class="user_list">
+
+        <li><a href="{:U('fund')}"><img src="__PUBLIC__/mobile/img/user_fund.png">资金明细</a></li>
+        <li><a href="{:U('invest')}"><img src="__PUBLIC__/mobile/img/user_invest.png">投资明细</a></li>
+        <li><a href="{:U('interest')}"><img src="__PUBLIC__/mobile/img/user_inter.png">收益流水</a></li>
+        <li><a href="{:U('tuiguang')}"><img src="__PUBLIC__/mobile/img/user_inter.png">推广流水</a></li>
+        <li><a href="{:U('tuandui')}"><img src="__PUBLIC__/mobile/img/user_inter.png">团队明细</a></li>
+        <li><a href="{:U('cash_record')}"><img src="__PUBLIC__/mobile/img/user_cash.png">提现流水</a></li>
+    </ul>
+    <ul class="user_list">
+        <li><a href="{:U('set_account')}"><img src="__PUBLIC__/mobile/img/user_safe.png">账户安全</a></li>
+        <li><a href="{:U('add_card')}"><img src="__PUBLIC__/mobile/img/user_card.png">支付宝绑定</a></li>
+         <gt name="user['padian']" value='0'>
+         <li><a href="{:U('certification')}"><img src="__PUBLIC__/mobile/img/user_cert.png">帕点转让</a></li>
+  </gt>
+    </ul>
+    <ul class="user_list">
+        <li><a href="{:U('recommend')}"><img src="__PUBLIC__/mobile/img/user_invite.png">邀请好友</a></li>
+        <a href="{:U('logout')}" class="input_btn">安全退出</a>
+    </ul>
+    <a href="{:U('logout')}" class="input_btn">安全退出</a>
+
+    <include file="Mobile:footer" menu="user"/>
+
+</div>
+</body>
+</html>

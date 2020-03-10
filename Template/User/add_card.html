@@ -1,0 +1,53 @@
+<include file="Mobile:header" nav="绑定银行卡"/>
+<div class="mobile">
+    <div class="othertop">
+        <a class="goback" href="{:U('person')}"><img src="__PUBLIC__/mobile/img/goback.png" /></a>
+        <div class="othertop-font">绑定支付宝</div>
+    </div>
+    <div class="header-nbsp"></div>
+    <form action="{:U('add_card')}" method="post" class="mycard_add">
+        <h3>绑定支付宝</h3>
+        <div class="input_text">
+            <i><img src="__PUBLIC__/mobile/img/icon_card.png"></i>
+            <input type="text" name="name" id="account" placeholder="请输入姓名" value="{$list['name']}">
+        </div>
+        <div class="input_text">
+            <i><img src="__PUBLIC__/mobile/img/icon_card.png"></i>
+            <input type="text" name="alipay" id="alipay" placeholder="请输入正确的支付宝账号" value="{$list['alipay']}">
+        </div>
+
+        <div class="error_tips"></div>
+        <p class="action">
+            <input type="submit" value="提交" class="sub" />
+            <input type="button" value="取消" class="sub del" />
+        </p>
+    </form>
+    <a class="input_btn">+添加支付宝</a>
+<!-- 银行卡  end-->
+
+</div>
+</body>
+<script>
+    $().ready(function(){
+    	$(".input_btn").click(function(){
+    		$(this).css("display","none");
+    		$(".mycard_add").css("display","block");
+    		$(".mycard").css("display","none");
+    	});
+    	$(".del").click(function(){
+            $(".input_btn").css("display","block");
+            $(".mycard_add").css("display","none");
+            $(".mycard").css("display","block");
+        });
+        $(".mycard_add").submit(function(){
+            var bank = $("#bank").val();
+            var account = $("#alipay").val();
+
+            if(account.length < 11){
+                msg("错误","请输入正确的支付宝账号！",1);
+                return false;
+            }
+        });
+    });
+</script>
+</html>

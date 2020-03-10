@@ -1,0 +1,209 @@
+<include file="common_header" title="会员管理"/>
+        <p class="curr">
+            <a>会员管理</a>&gt;&gt;
+            <span>角色添加</span>
+        </p>
+        <div class="content">
+        <form action="{:U('quxian_editt')}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$list.id}">
+            <div class="list_main">
+
+                <div class="width_table">
+	                <table style="width:100%;">
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>会员管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="1" <php>if(in_array(1, $list['auth'])) echo "checked";</php>>
+                                  <span>会员列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="2" <php>if(in_array(2, $list['auth'])) echo "checked";</php>>
+                                  <span>角色类型</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="3" <php>if(in_array(3, $list['auth'])) echo "checked";</php>>
+                                  <span>管理员列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="4" <php>if(in_array(4, $list['auth'])) echo "checked";</php>>
+                                  <span>等级设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="5" <php>if(in_array(5, $list['auth'])) echo "checked";</php>>
+                                  <span>会员关联网</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="6" <php>if(in_array(6, $list['auth'])) echo "checked";</php>>
+                                  <span>关联银行卡管理</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>财务管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="7" <php>if(in_array(7, $list['auth'])) echo "checked";</php>>
+                                  <span>充值记录</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="8" <php>if(in_array(8, $list['auth'])) echo "checked";</php>>
+                                  <span>提现申请</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="9" <php>if(in_array(9, $list['auth'])) echo "checked";</php>>
+                                  <span>流水记录查询</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>项目管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="10" <php>if(in_array(10, $list['auth'])) echo "checked";</php>>
+                                  <span>项目列表</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="11" <php>if(in_array(11, $list['auth'])) echo "checked";</php>>
+                                  <span>已投项目</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="12" <php>if(in_array(12, $list['auth'])) echo "checked";</php>>
+                                  <span>项目分类</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>文章管理</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="13" <php>if(in_array(13, $list['auth'])) echo "checked";</php>>
+                                  <span>文章类型</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="14" <php>if(in_array(14, $list['auth'])) echo "checked";</php>>
+                                  <span>文章列表</span>
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="">
+                                  <span>系统设置</span>
+                              </label>
+                          </div></br>
+
+                          <div>
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="checkbox" name="form-field-checkbox[]" value="15" <php>if(in_array(15, $list['auth'])) echo "checked";</php>>
+                                  <span>网站信息</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="16" <php>if(in_array(16, $list['auth'])) echo "checked";</php>>
+                                  <span>奖励设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="17" <php>if(in_array(17, $list['auth'])) echo "checked";</php>>
+                                  <span>幻灯片设置</span>
+                                  <input type="checkbox" name="form-field-checkbox[]" value="18" <php>if(in_array(18, $list['auth'])) echo "checked";</php>>
+                                  <span>支付设置</span>
+                                  <!-- <input type="checkbox" name="form-field-checkbox[]" value="19" <php>if(in_array(19, $list['auth'])) echo "checked";</php>>
+                                  <span>密码设置</span> -->
+
+                              </label>
+                          </div>
+                      </div></br>
+
+
+                      <div>
+                          <div class="auth">
+                              <label class="checkbox-label checkbox-inline">
+                                  <input type="text" name="title" placeholder="部门名称" value="{$list.title}">
+                              </label>
+                          </div>
+                      </div></br>
+
+                      <div class="button" style="padding-left: 0px;">
+                            <input type="submit" value="立即提交" class="submit" />
+
+                            <input type="reset" value="重置" class="reset"/>
+                      </div>
+
+	                </table>
+                </div>
+
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        $(function(){
+            $('.auth input[type="checkbox"]').on('change',function(){
+                $(this).parent().parent().next().next().find('input').prop('checked',this.checked);
+            });
+
+            $('.reset').click(function(){
+                $("input:checkbox").removeAttr("checked");
+            })
+        });
+</script>
+
+<script type="text/javascript">
+
+	function addyhk(uid){
+		if(confirm("确认要新增当前用户的银行卡吗？")){
+			var data={
+				uid:uid,
+				account:$("#account" + uid ).val(),
+				bank:$("#bank" + uid ).val()
+			};
+			$.post("{:U('user_yhk_add')}",data,function(e){
+				alert(e.msg); location.reload();
+			},"json");
+		}
+	}
+
+    function bcyhk(objid){
+
+		if(confirm("确认要编辑当前银行卡吗？")){
+			var data={
+				id:objid,
+				id:objid,
+				account:$("#yhk" + objid ).val()
+			};
+
+			$.post("{:U('user_yhk_edit')}",data,function(e){
+				alert(e.msg);
+			},"json");
+        }
+
+	}
+	function scyhk(objid){
+
+		if(confirm("确认要删除当前银行卡吗？")){
+			var data={
+				id:objid,
+				account:$("#yhk" + objid ).val()
+			};
+
+			$.post("{:U('user_yhk_del')}",data,function(e){
+				alert(e.msg);
+				location.reload();
+			},"json");
+        }
+
+	}
+</script>
+<include file="common_footer" menu="menu_user" nav="1"/>

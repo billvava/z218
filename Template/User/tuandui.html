@@ -1,0 +1,19 @@
+<include file="Mobile:header" nav="团队信息"/>
+<div class="mobile">
+    <div class="othertop">
+        <a class="goback" href="javascript:history.back();"><img src="__PUBLIC__/mobile/img/goback.png" /></a>
+        <div class="othertop-font">团队信息</div>
+    </div>
+    <div class="header-nbsp"></div>
+    <div class="record_outer">
+    	<table>
+            <foreach name="list" item="v" key="k">
+                <tr>
+                    <td><a href="{:U('team',['id'=>$k])}" class="a2" style="height: 26px;line-height: 26px;">第{$k}代&nbsp;&nbsp;&nbsp;&nbsp;{$v}人</a></td>
+                </tr>
+            </foreach>
+    	</table>
+    </div>
+</div>
+</body>
+</html>

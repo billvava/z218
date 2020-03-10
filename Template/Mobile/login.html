@@ -1,0 +1,36 @@
+<include file="header" nav="登录"/>
+<style>
+    .input_text{background:none;padding:.1rem .3rem !important;border-radius:10px;width: 85%;
+    margin: auto;border-bottom: 2px solid #e0e0e0;}
+    .input_text.log input{width:100%;background:none;color:#fff;}
+    .input_btn{background: linear-gradient(to right, #fdc727 , #ea9a41);border-radius: 40px;}
+</style>
+<div class="mobile">
+    <div >
+        <a class="goback" href="{:U('mobile/index')}"><img src="__PUBLIC__/mobile/img/goback.png" /></a>
+        <!-- <div class="othertop-font">登录</div> -->
+    </div>
+    <div class="header-nbsp"></div>
+    <div style="text-align: center;margin: 60px 0;">
+        <img src="__PUBLIC__/mobile/img/2121.png" width="50%">
+        <!-- <div style="font-size: 44px;font-weight: bold;padding: 50px 0;color: #4f79bc;">丰  益  国  际</div> -->
+    </div>
+        <div class="login_bg">
+	        <form action="{:U('login')}" method="post">
+	            <div class="input_text log">
+	            	<!-- <label>账号</label> -->
+                    <input type="text" name="account" placeholder="请输入手机号码">
+                </div>
+                <div class="input_text log">
+	            	<!-- <label>密码</label> -->
+                    <input type="password" name="password" placeholder="请输入登录密码">
+                </div>
+                <div class="error_tips"></div>
+                <input type="submit" class="input_btn" value="登录" />
+                <p class="p2 re"><a href="reg.html">注册账号</a></p>
+                <if condition="smsStatus('18004') eq 1"><p class="p1"><a href="forget.html">忘记密码?</a></p></if>
+	        </form>
+        </div>
+    </div>
+</body>
+</html>

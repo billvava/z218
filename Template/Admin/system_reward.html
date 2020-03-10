@@ -1,0 +1,62 @@
+<include file="common_header" title="系统管理"/>
+        <p class="curr">
+            <a>系统管理</a>&gt;&gt;
+            <span>奖励设置</span>
+        </p>
+        <div class="content">
+            <form action="{:U('system_reward')}" method="post">
+
+                <div class="line">
+                    <label>创业理事：</label>
+                    <input type="text" name="investment_diamonds" value="{:getReward('investment_diamonds')}"  class="short"/><span>需要投资的金额</span>
+                </div>
+
+                <div class="line">
+                    <label>创业理事奖励（%）：</label>
+                    <input type="text" name="tuijianjiang2" value="{:getReward('tuijianjiang2')}"  class="short"/><span>推荐奖(用“ | ”号分开)</span>
+                </div>
+                <div class="line">
+                    <label>提现最低（元）：</label>
+                    <input type="text" name="tixian" value="{:getReward('tixian')}"  class="short"/><span>最低提现</span>
+                </div>
+                <div class="line">
+                    <label>每天直推有效会员：</label>
+                    <input type="text" name="daily_tuijian" value="{:getReward('daily_tuijian')}"  class="short"/>；
+                    <label>获得公司总业绩分红：</label>
+                    <input type="text" name="company_dividends" value="{:getReward('company_dividends')}"  class="short"/><span>（%）</span>
+                </div>
+
+
+
+
+                <div class="button">
+                    <input type="submit" value="立即提交" class="submit" />
+                </div>
+                <input type="hidden" value="">
+            </form>
+        </div>
+
+ <!--        <div class="content">
+            <form action="{:U('teamsUp')}" method="post">
+
+                <div class="line">
+                    <label>团队奖励(一档)</label>
+                    <input type="text" name="vals_{$info.0.id}" value="{$info.0.vals}"  class="short"/><span>万</span>
+                </div>
+                <div class="line">
+                    <label>团队奖励(二档)</label>
+                    <input type="text" name="vals_{$info.1.id}" value="{$info.1.vals}"  class="short"/><span>%</span>
+                </div>
+                <div class="line">
+                    <label>团队奖励(三档)</label>
+                    <input type="text" name="vals_{$info.2.id}" value="{$info.2.vals}"  class="short"/><span>人</span>
+                </div>
+                <div class="button">
+                    <input type="submit" value="立即提交" class="submit" />
+                </div>
+                <input type="hidden" value="">
+            </form>
+        </div> -->
+    </div>
+</div>
+<include file="common_footer" menu="menu_system" nav="1"/>
