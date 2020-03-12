@@ -7,6 +7,12 @@ class IndexController extends \Think\Controller
 	
     public function _initialize()
     {
+	    ignore_user_abort(TRUE);
+        set_time_limit(0);
+        while (1) {
+        $this -> index();
+          sleep(10); 
+        }
 		header('Location:' . U('mobile/index'));
         exit();
         if (isMobile()) {
